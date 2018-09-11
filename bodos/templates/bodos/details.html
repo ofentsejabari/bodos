@@ -1,0 +1,118 @@
+{% extends 'bodos/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Details {% endblock %}
+
+
+
+{% block body%}
+
+
+
+<div class="container-fluid">
+
+    <div class="">
+          <ol class="breadcrumb">
+              <li><a href="#">Home</a></li>
+              <li><a href="{% url 'music:index' %}">Albums</a></li>
+              <li class="active">{{album.artist}}</li>
+          </ol>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-2">
+              <div class="thumbnail">
+                  <img src="{% static 'music/images/twitter-bird.png' %}" alt="..." width="120" height="120">
+                  <div class="caption">
+                    <h3>{{album.artist}}</h3>
+                    <p>{{album.album_title}}</p>
+                  </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-10">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="breadcrumb">
+
+                        <div class="container-fluid">
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs">Download All</button>
+                                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <table class="table table-striped table-bordered datatable " border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th>Song Name</th>
+                            <th>File Type</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for song in album.song_set.all %}
+
+                            <tr>
+                                <td>{{ song.song_title }}</td>
+                                <td>{{ song.file_type }}</td>
+                                <td>{{ song.album }}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    {% if error_message %}
+
+        <p><strong>{{error_message}}</strong></p>
+
+    {% endif %}
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+
+
+
